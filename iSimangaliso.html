@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Beneficiary Tracker</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.14.0/css/all.css"
+      integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc"
+      crossorigin="anonymous"
+    />
+
+    <style>
+        th{ 
+            cursor: pointer;
+            color:#fff;
+                }
+    
+                button { 
+                    background: linear-gradient(
+          to right,
+          #fc00ff,
+          #12d8fa,
+          #1fa2ff
+        ); 
+        display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 33%;
+          height: 32px;
+          margin-bottom: 40px;
+        } 
+    
+    
+        input {
+            display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 40%;
+          height: 39px;
+        }
+    </style>
+  </head>
+
+<div class="intro="home">
+    <div class="intro__container">
+      <h2 class="intro__heading">iSimangaliso Beneficiaries</h2>
+      <input type="text" placeholder="Beneficiary name">
+      <button>Enter Beneficiary</button>
+      <ul>
+        <li>
+        </li>
+      </ul>
+    </div>
+  </div>
+  </html>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+<style>
+    th{ 
+        cursor: pointer;
+        color:#fff;
+            }
+</style>
+
+
+<table class="table table-striped">
+    <tr  class="bg-info">
+        <th  class="bg-info" data-colname="name" data-order="desc">Full Name &#9650</th>
+        <th  data-colname="age" data-order="desc">Age &#9650</th>
+        <th  data-colname="gender" data-order="desc">Gender &#9650</th>
+    </tr>
+    <tbody id="myTable">
+        
+    </tbody>
+</table>
+
+
+<script>
+var myArray = [
+{'name':'Michael Scott', 'age':'30', 'gender':'Male'},
+    {'name':'Andiswa Hadebe', 'age':'32', 'gender':'Female'},
+    {'name':'Paul Anderson', 'age':'29', 'gender':'Male'},
+    {'name':'Liviwe Dyantyi', 'age':'25', 'gender':'Female'},
+    {'name':'Athi Kula', 'age':'27', 'gender':'Female'},
+    {'name':'Thomas Addams', 'age':'24', 'gender':'Male'},
+]
+
+
+buildTable(myArray)
+
+
+
+ $('th').on('click', function(){
+     var column = $(this).data('colname')
+     var order = $(this).data('order')
+     var text = $(this).html()
+     text = text.substring(0, text.length - 1);
+     
+     
+     
+     if (order == 'desc'){
+        myArray = myArray.sort((a, b) => a[column] > b[column] ? 1 : -1)
+        $(this).data("order","asc");
+        text += '&#9660'
+     }else{
+        myArray = myArray.sort((a, b) => a[column] < b[column] ? 1 : -1)
+        $(this).data("order","desc");
+        text += '&#9650'
+     }
+
+    $(this).html(text)
+    buildTable(myArray)
+    })
+
+
+   
+ 
+    
+function buildTable(data){
+    var table = document.getElementById('myTable')
+    table.innerHTML = ''
+    for (var i = 0; i < data.length; i++){
+        var colname = `name-${i}`
+        var colage = `age-${i}`
+        var colgender = `gender-${i}`
+
+        var row = `<tr>
+                        <td>${data[i].name}</td>
+                        <td>${data[i].age}</td>
+                        <td>${data[i].gender}</td>
+                   </tr>`
+        table.innerHTML += row
+    }
+}
+
+</script>
